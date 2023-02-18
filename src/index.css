@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+:root {
+    --min-game-size: 320px;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: 0;
+    font-family: 'Inter', sans-serif;
+}
+
+.Game {
+    height: 100vh;
+    background: #0B2434;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.game-box {
+    min-width: var(--min-game-size);
+    min-height: var(--min-game-size);
+    background-color: #F5F5F5;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.dices {
+    display: grid;
+    grid-template: repeat(2, 1fr) / repeat(5, 1fr);
+    gap: 18px;
+}
+
+.dices .dice {
+    height: 36px;
+    width: 36px;
+    background: #FFFFFF;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
