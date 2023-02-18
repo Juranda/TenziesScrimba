@@ -11,6 +11,11 @@
     font-family: 'Inter', sans-serif;
 }
 
+button {
+    all: unset;
+    cursor: pointer;
+}
+
 .Game {
     height: 100vh;
     background: #0B2434;
@@ -20,13 +25,19 @@
 }
 
 .game-box {
-    min-width: var(--min-game-size);
-    min-height: var(--min-game-size);
+    width: var(--min-game-size);
+    height: var(--min-game-size);
     background-color: #F5F5F5;
     border-radius: 10px;
     display: flex;
+    flex-direction: column;
     justify-content: space-around;
     align-items: center;
+    padding: 34px;
+}
+
+.top-texts {
+    text-align: center;
 }
 
 .dices {
@@ -41,8 +52,20 @@
     background: #FFFFFF;
     box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.15);
     border-radius: 4px;
+    cursor: pointer;
 
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.roll-button {
+    background-color: #5035FF;
+    min-width: 92px;
+    min-height: 36px;
+    text-align: center;
+    color: #FFFFFF;
+
+    box-shadow: 0px 3.2px 7.68px rgba(0, 0, 0, 0.18);
+    border-radius: 4px;
 }
