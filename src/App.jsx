@@ -1,10 +1,28 @@
 import { nanoid } from 'nanoid';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Dice from "./components/Dice";
+import Confetti from 'react-confetti';
 
 export default function App() {
 
   const [dices, setDices] = useState(allRandomDices());
+  const [tenzies, setTenzies] = useState(false);
+
+  useEffect(() => {
+    const firstNum = dices[0].value;
+
+    const allHeld = dices.every(dice => dice.isHeld);
+    const allSameNumber = dices.every(dice => dice.value === firstNum);
+
+    if (allHeld && allSameNumber) {
+      console.log("Game won!");
+      gameWon();
+    } else {
+      console.log("Dices changed!")
+    }
+
+  }, [dices]);
+
 
   function allRandomDices() {
     const dices = [];
@@ -30,9 +48,13 @@ export default function App() {
   }
 
   function rool() {
-    setDices(prevDices => {
-      return prevDices.map(dice => dice.isHeld ? dice : createNewDice());
-    });
+    setDices(prevDices =>
+      prevDices.map(
+        dice => dice.isHeld ?
+          dice :
+          createNewDice()
+      )
+    );
   }
 
   function createNewDice() {
@@ -43,6 +65,15 @@ export default function App() {
     }
   }
 
+  function gameWon() {
+    setTenzies(true);
+  }
+  function newGame() {
+
+    setTenzies(false);
+    setDices(allRandomDices());
+  }
+
   const diceElements = dices.map(dice => {
     return <Dice key={dice.id} onClick={() => toggleDice(dice.id)} value={dice.value} isHeld={dice.isHeld} />
   });
@@ -51,6 +82,9 @@ export default function App() {
   return (
     <div className="Game">
       <div className="game-box">
+      {
+        tenzies ? <Confetti /> : ""
+      }
         <div className="top-texts">
           <h1>Tenzies</h1>
           <p>Role até que todos os dados sejam iguais. Clique em cada dado para congelá-lo em seu valor atual entre os lançamentos.</p>
@@ -58,7 +92,7 @@ export default function App() {
         <div className="dices">
           {diceElements}
         </div>
-        <button onClick={rool} className="roll-button">Rolar</button>
+        <button onClick={tenzies ? newGame : rool} className="roll-button">{tenzies ? "De novo" : "Rolar"}</button>
       </div>
     </div>
   );
