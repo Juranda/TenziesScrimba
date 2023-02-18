@@ -2,11 +2,13 @@ import { nanoid } from 'nanoid';
 import { useEffect, useState } from "react";
 import Dice from "./components/Dice";
 import Confetti from 'react-confetti';
+import Modal from './components/Modal';
 
 export default function App() {
 
   const [dices, setDices] = useState(allRandomDices());
   const [tenzies, setTenzies] = useState(false);
+  const [modalOpen, setModalState] = useState(false);
 
   useEffect(() => {
     const firstNum = dices[0].value;
@@ -68,10 +70,14 @@ export default function App() {
   function gameWon() {
     setTenzies(true);
   }
-  function newGame() {
 
+  function newGame() {
     setTenzies(false);
     setDices(allRandomDices());
+  }
+
+  function toggleModal() {
+    setModalState(prev => !prev);
   }
 
   const diceElements = dices.map(dice => {
@@ -81,10 +87,8 @@ export default function App() {
 
   return (
     <div className="Game">
+      {tenzies && <Confetti />}
       <div className="game-box">
-      {
-        tenzies ? <Confetti /> : ""
-      }
         <div className="top-texts">
           <h1>Tenzies</h1>
           <p>Role até que todos os dados sejam iguais. Clique em cada dado para congelá-lo em seu valor atual entre os lançamentos.</p>
@@ -92,8 +96,18 @@ export default function App() {
         <div className="dices">
           {diceElements}
         </div>
-        <button onClick={tenzies ? newGame : rool} className="roll-button">{tenzies ? "De novo" : "Rolar"}</button>
+        <div className="buttons"> 
+          <button onClick={tenzies ? newGame : rool} className="roll-button">{tenzies ? "De novo" : "Rolar"}</button>
+          {tenzies &&
+            <button className="roll-button">Status</button>
+          }
+        </div>
       </div>
+      <Modal isActive={modalOpen} />
+
+      <button onClick={toggleModal} className="roll-button status-button">
+          { modalOpen ? "Fechar status" : "Abrir Status" }
+      </button>
     </div>
   );
 }
