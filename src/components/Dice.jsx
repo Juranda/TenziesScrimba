@@ -1,6 +1,6 @@
-export default function Dice({ value, isHeld }) {
+export default function Dice({ onClick, id, value, isHeld }) {
     return (
-        <div className="dice">
+        <div onClick={onClick} className={isHeld ? "dice dice-held" : "dice"}>
             <h2>{value}</h2>
         </div>
     );
