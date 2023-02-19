@@ -1,17 +1,19 @@
 import StatAttribute from "./StatAttribute";
 
-export default function Modal({ isActive, children, closeModal }) {
+export default function Modal({ isActive, stats, closeModal }) {
 
+    const statsElements = Object.values(stats).map((entrie, index) => {
+        return <StatAttribute key={index} name={entrie.text} value={entrie.value} /> 
+    })
 
     return isActive &&
         <div className="game-stats-modal">
             <div className="game-stats">
                 <h1 className="game-stats-title">Status</h1>
                 <div className="stats">
-                    <StatAttribute name="Tempo de jogo" value="00:00" />
-                    <StatAttribute name="Dados gerados" value="73" />
-                    <StatAttribute name="Dados marcados" value="14" />
+                    {statsElements}
                 </div>
+                <button className="roll-button" onClick={closeModal}>Fechar</button>
             </div>
         </div>
 }

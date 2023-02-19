@@ -37,6 +37,7 @@ button {
     justify-content: space-around;
     align-items: center;
     padding: 34px;
+    position: relative;
 }
 
 .top-texts {
@@ -101,14 +102,19 @@ button {
     justify-content: center;
     align-items: center;
     background-color: rgba(0, 0, 0, 0.25);
+    z-index: 3;
 }
 
 .game-stats {
     background-color: white;
     width: calc(0.8 * var(--min-game-size));
-    height: calc(1.3 * var(--min-game-size));
-    padding: 34px;
+    height: calc(0.8 * var(--min-game-size));
+    padding: 20px;
     border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .game-stats-title {
@@ -118,6 +124,9 @@ button {
 .game-stats .stats {
     display: flex;
     flex-direction: column;
+    justify-content: center ;
+    width: 100%;
+    height: 100%;
     gap: 20px;
 }
 
@@ -129,4 +138,5 @@ button {
     background-color: #59E391;
     padding: 5px;
     font-weight: 700;
+    z-index: 3;
 }
